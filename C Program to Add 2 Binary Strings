@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <string.h>
+
+void reverse(char str[]) {
+    int i, j;
+    char temp;
+    int len = strlen(str);
+
+    for (i = 0, j = len - 1; i < j; i++, j--) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+}
+
+int main() {
+    char a[200], b[200], result[300];
+    int i, j, k = 0, carry = 0;
+
+    printf("Enter first binary string: ");
+    scanf("%s", a);
+
+    printf("Enter second binary string: ");
+    scanf("%s", b);
+
+    int len1 = strlen(a);
+    int len2 = strlen(b);
+
+    i = len1 - 1;
+    j = len2 - 1;
+
+    while (i >= 0 || j >= 0 || carry == 1) {
+        int bit1 = (i >= 0) ? a[i] - '0' : 0;
+        int bit2 = (j >= 0) ? b[j] - '0' : 0;
+
+        int sum = bit1 + bit2 + carry;
+        result[k++] = (sum % 2) + '0';
+        carry = sum / 2;              
+
+        i--;
+        j--;
+    }
+
+    result[k] = '\0'; 
+
+    reverse(result);
+
+    printf("Sum = %s\n", result);
+
+    return 0;
+}
